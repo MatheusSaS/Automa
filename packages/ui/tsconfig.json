@@ -1,0 +1,14 @@
+{
+  "extends": "@automa/tsconfig/react-library.json",
+  "include": [
+    "."
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": ["./src/*"]
+    }
+  },
+  "exclude": ["dist","build","node_modules"
+  ]
+}

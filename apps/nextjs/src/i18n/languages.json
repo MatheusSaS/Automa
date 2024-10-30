@@ -1,0 +1,18 @@
+{
+  "languages": [
+    {
+      "value": "en-US",
+      "name": "English (United States)",
+      "prompt_name": "English",
+      "example": "Hello, automa!",
+      "supported": true
+    },
+    {
+      "value": "pt-BR",
+      "name": "Português (Brasil)",
+      "prompt_name": "Portuguese",
+      "example": "Olá, automa!",
+      "supported": true
+    }
+  ]
+}

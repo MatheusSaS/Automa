@@ -1,0 +1,151 @@
+generator kysely {
+  provider     = "prisma-kysely"
+  output       = "."
+  enumFileName = "enums.ts"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
+  relationMode = "prisma"
+}
+
+enum AgentModelName {
+  gpt_3_5_turbo
+}
+
+model Agents {
+  id String @id @db.VarChar(30)
+
+  userId       String         @db.VarChar(36)
+  name         String
+  description  String?
+  promptSystem String?
+  modelName    AgentModelName @default(gpt_3_5_turbo)
+  temperature  Float          @default(0.0)
+
+  createdAt DateTime @default(now())
+
+  agentDatabases AgentDatabase[]
+
+  @@index([userId])
+  @@index([userId, id])
+}
+
+model DataBase {
+  id          String   @id @default(cuid())
+  userId      String   @db.VarChar(36)
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+
+  agentDatabases AgentDatabase[]
+  sites          Site[]
+  files          File[]
+
+  @@index([userId])
+}
+
+model AgentDatabase {
+  userId     String
+  agentId    String
+  databaseId String
+
+  agent    Agents   @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  database DataBase @relation(fields: [databaseId], references: [id], onDelete: Cascade)
+
+  @@id([agentId, databaseId])
+  @@index([databaseId])
+}
+
+model Site {
+  id         String   @id @default(cuid())
+  userId     String   @db.VarChar(36)
+  url        String
+  urlMatch   String?
+  selector   String?
+  characters Int
+  createdAt  DateTime @default(now())
+
+  dataBaseId String
+  dataBase   DataBase @relation(fields: [dataBaseId], references: [id], onDelete: Cascade)
+
+  File File[]
+
+  @@index([userId])
+  @@index([dataBaseId])
+}
+
+model File {
+  id        String   @id @default(cuid())
+  userId    String   @db.VarChar(36)
+  name      String
+  createdAt DateTime @default(now())
+
+  dataBaseId String
+  dataBase   DataBase @relation(fields: [dataBaseId], references: [id], onDelete: Cascade)
+
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  siteId String?
+
+  @@index([userId])
+  @@index([dataBaseId])
+  @@index([siteId])
+}
+
+// NextAuth.js Models
+// NOTE: When using postgresql, mysql or sqlserver, 
+// uncomment the @db.Text annotations below
+// @see https://next-auth.js.org/schemas/models
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  id         String   @id @default(uuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

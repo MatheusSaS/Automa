@@ -1,0 +1,8 @@
+{
+  "extends": "@automa/tsconfig/base.json",
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "include": ["index.mjs"],
+  "exclude": ["node_modules"]
+}

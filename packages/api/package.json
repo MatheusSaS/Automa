@@ -1,0 +1,63 @@
+{
+  "name": "@automa/api",
+  "private": true,
+  "version": "0.1.0",
+  "exports": {
+    ".": "./src/index.ts",
+    "./env": "./src/env.mjs",
+    "./edge": "./src/edge.ts",
+    "./lambda": "./src/lambda.ts",
+    "./transformer": "./src/transformer.ts",
+    "./validators": "./src/validators.ts",
+    "./trpcExressMiddleware": "./src/swagger/trpcExressMiddleware.ts",
+    "./expressMiddleware": "./src/swagger/expressMiddleware.ts",
+    "./openapi": "./src/swagger/openapi.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check \"**/*.{mjs,ts,json}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "typescript": "^5.5.4",
+    "eslint": "^8.48.0",
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {
+    "@automa/auth": "workspace:*",
+    "@automa/db": "workspace:*",
+    "@automa/utils": "workspace:*",
+    "@dinero.js/currencies": "2.0.0-alpha.14",
+    "@t3-oss/env-nextjs": "^0.11.0",
+    "@trpc/client": "10.45.2",
+    "@trpc/server": "10.45.2",
+    "dinero.js": "2.0.0-alpha.14",
+    "superjson": "2.2.1",
+    "zod": "^3.23.8",
+    "zod-form-data": "^2.0.2",
+    "axios": "^1.7.5",
+    "cheerio": "^1.0.0",
+    "trpc-swagger": "^1.2.6"
+  },
+  "devDependencies": {
+    "@automa/eslint-config": "workspace:*",
+    "@automa/prettier-config": "workspace:*",
+    "@automa/tsconfig": "workspace:*"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@automa/eslint-config/base"
+    ]
+  },
+  "prettier": "@automa/prettier-config"
+}

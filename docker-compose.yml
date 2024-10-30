@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: db-automa
+    restart: always
+    ports:
+      - 5432:5432  # enables connecting locally via psql
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=automa
+
+  qdrant:
+    image: qdrant/qdrant
+    mem_limit: 450m
+    container_name: qdrant-automa
+    restart: always
+    ports:
+      - 6333:6333 # Porta para API HTTP do Qdrant
+      - 6334:6334 # Porta para API gRPC do Qdrant
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+volumes:
+  qdrant_storage:
+    driver: local

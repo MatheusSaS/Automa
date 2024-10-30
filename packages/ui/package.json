@@ -1,0 +1,55 @@
+{
+  "name": "@automa/ui",
+  "private": true,
+  "version": "0.1.0",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src/",
+    "dev": "tsup --watch",
+    "check-types": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next": "14.2.13",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@automa/eslint-config": "workspace:*",
+    "@automa/prettier-config": "workspace:*",
+    "@automa/tailwind-config": "workspace:*",
+    "@automa/tsconfig": "workspace:*",
+    "@automa/utils": "workspace:*",
+    "tailwindcss": "3.4.8",
+    "tsup": "^8.2.4"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "1.1.0",
+    "@radix-ui/react-tooltip": "1.1.2",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-scroll-area": "1.1.0",
+    "@radix-ui/react-popover": "1.1.1",
+    "@radix-ui/react-checkbox": "^1.0.4",
+    "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.424.0",
+    "vaul": "^0.9.1",
+    "react-markdown": "^9.0.1",
+    "react-textarea-autosize": "^8.5.3",
+    "react-code-blocks": "0.1.6",
+    "react-hook-form": "^7.53.0",
+    "prettier": "^3.2.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@automa/eslint-config/base",
+      "@automa/eslint-config/react"
+    ]
+  },
+  "prettier": "@automa/prettier-config"
+}
