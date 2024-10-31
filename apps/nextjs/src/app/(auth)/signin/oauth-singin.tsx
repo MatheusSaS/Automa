@@ -22,23 +22,19 @@ export default function OauthSingIn() {
   }
   return (
     <>
-      <div className="flex space-x-2">
-        <Button
-          type="outline"
-          size={"lg"}
-          className="w-full p-2 shadow"
-          loading={isLoading === "apple"}
-          icon={<Icons.GitHub />}
-          onClick={() => oauthSignIn("apple")}
-        ></Button>
-        <Button
-          type="outline"
-          size={"lg"}
-          className="w-full shadow"
-          loading={isLoading === "google"}
-          icon={<Icons.Google />}
-          onClick={() => oauthSignIn("google")}
-        ></Button>
+      <div className="flex items-center justify-center space-x-2">
+        {isLoading ? (
+          <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <Button
+            size={"lg"}
+            variant={"outline"}
+            className="w-full shadow"
+            onClick={() => oauthSignIn("google")}
+          >
+            <Icons.Google />
+          </Button>
+        )}
       </div>
     </>
   )

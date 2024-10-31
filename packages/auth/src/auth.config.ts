@@ -22,7 +22,7 @@ declare module "next-auth" {
 
 const adapter = PrismaAdapter(prisma)
 
-const protectedPages = ["/", "/dashboard"]
+const publicPages = ["/", "/signin"]
 export const isSecureContext = env.NODE_ENV !== "development"
 
 export const authConfig: NextAuthConfig = {
@@ -42,16 +42,28 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
-      const isProtectedPage = protectedPages.includes(nextUrl.pathname)
-      if (isProtectedPage) {
+      const isPublicPages = publicPages.includes(nextUrl.pathname)
+      if (!isPublicPages) {
         if (isLoggedIn) return true
         return false
       }
       return true
     },
     async redirect({ baseUrl, url }) {
-      if (url.endsWith("/signin")) return url
-      return baseUrl
+      const callbackUrl = new URL(url).searchParams.get("callbackUrl")
+
+      // Se existir `callbackUrl`, redireciona para ela após o login
+      if (callbackUrl) {
+        return callbackUrl
+      }
+
+      // Se não houver `callbackUrl`, redireciona para o dashboard
+      if (url === baseUrl || url.endsWith("/signin")) {
+        return baseUrl + "/dashboard"
+      }
+
+      // Mantém o redirecionamento para outras URLs, se for válido
+      return url.startsWith(baseUrl) ? url : baseUrl
     },
     async session(opts) {
       if (!("user" in opts))

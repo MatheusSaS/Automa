@@ -6,13 +6,13 @@ generator kysely {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
   provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  directUrl    = env("DIRECT_URL")
-  relationMode = "prisma"
+  url          = env("POSTGRES_PRISMA_URL")
+  directUrl    = env("POSTGRES_PRISMA_URL_NON_POOLING")
 }
 
 enum AgentModelName {
@@ -31,71 +31,8 @@ model Agents {
 
   createdAt DateTime @default(now())
 
-  agentDatabases AgentDatabase[]
-
   @@index([userId])
   @@index([userId, id])
-}
-
-model DataBase {
-  id          String   @id @default(cuid())
-  userId      String   @db.VarChar(36)
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-
-  agentDatabases AgentDatabase[]
-  sites          Site[]
-  files          File[]
-
-  @@index([userId])
-}
-
-model AgentDatabase {
-  userId     String
-  agentId    String
-  databaseId String
-
-  agent    Agents   @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  database DataBase @relation(fields: [databaseId], references: [id], onDelete: Cascade)
-
-  @@id([agentId, databaseId])
-  @@index([databaseId])
-}
-
-model Site {
-  id         String   @id @default(cuid())
-  userId     String   @db.VarChar(36)
-  url        String
-  urlMatch   String?
-  selector   String?
-  characters Int
-  createdAt  DateTime @default(now())
-
-  dataBaseId String
-  dataBase   DataBase @relation(fields: [dataBaseId], references: [id], onDelete: Cascade)
-
-  File File[]
-
-  @@index([userId])
-  @@index([dataBaseId])
-}
-
-model File {
-  id        String   @id @default(cuid())
-  userId    String   @db.VarChar(36)
-  name      String
-  createdAt DateTime @default(now())
-
-  dataBaseId String
-  dataBase   DataBase @relation(fields: [dataBaseId], references: [id], onDelete: Cascade)
-
-  site   Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade)
-  siteId String?
-
-  @@index([userId])
-  @@index([dataBaseId])
-  @@index([siteId])
 }
 
 // NextAuth.js Models

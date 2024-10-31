@@ -24,17 +24,17 @@ export const metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
   },
   openGraph: {
-    images: [{ url: "/opengraph-image.png" }],
+    images: [{ url: "/logo.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: "/favicon.ico",
-    creator: "@automa",
+    images: "/logo.png",
+    creator: "@MatheusSaS",
   },
   metadataBase: new URL("https://automa-corp.jumr.dev"),
 }
@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={cn(
-          "font-sans antialiased",
+          "min-h-screen font-sans antialiased",
           fontSans.variable,
           fontCal.variable,
         )}

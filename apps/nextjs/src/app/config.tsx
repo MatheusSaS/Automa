@@ -1,9 +1,9 @@
 import type { Route } from "next"
 
 export const siteConfig = {
-  name: "automa Chat",
+  name: "Automa trade - Teste",
   description:
-    "automa Chat é o assistente virtual da automa, focado em responder perguntas dos clientes e auxiliá-los no dia a dia com os sistemas da automa.",
+    "Teste realizado para a Automa trade para a vaga de Desenvolvedor Next.JS",
 }
 
 export const navItems = [

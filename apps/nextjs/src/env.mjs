@@ -8,8 +8,8 @@ export const env = createEnv({
       .default("development"),
   },
   server: {
-    DATABASE_URL: z.string().url(),
-    DIRECT_URL: z.string().url(),
+    POSTGRES_PRISMA_URL: z.string().url(),
+    POSTGRES_PRISMA_URL_NON_POOLING: z.string().url(),
     NODE_ENV: z.string().optional(),
   },
   // Client side variables gets destructured here due to Next.js static analysis

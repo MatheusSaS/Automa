@@ -1,9 +1,9 @@
-import { remember } from "./remember"
 import { PrismaClient } from "@prisma/client"
-import { withAccelerate } from "@prisma/extension-accelerate"
+import { remember } from "./remember"
+import { Pool } from "@neondatabase/serverless"
+import { PrismaNeon } from "@prisma/adapter-neon"
 
-export const prisma = remember("prisma", () =>
-  new PrismaClient({
-    datasources: { db: { url: process.env.DATABASE_URL } },
-  }).$extends(withAccelerate()),
-)
+const neon = new Pool({ connectionString: process.env.POSTGRES_PRISMA_URL })
+const adapter = new PrismaNeon(neon)
+
+export const prisma = remember("prisma", () => new PrismaClient({ adapter }))
