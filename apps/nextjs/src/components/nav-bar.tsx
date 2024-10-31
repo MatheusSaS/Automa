@@ -2,6 +2,7 @@ import Link from "next/link"
 import LogoAutoma from "./logo-automa"
 import { Button } from "@automa/ui"
 import { ModeToggle } from "./mode-toggle"
+import { LangueToggle } from "./langue-toggle"
 
 export default function NavBar() {
   return (
@@ -22,6 +23,7 @@ export default function NavBar() {
             className="h-8 w-8 rounded-full bg-background"
             asChild
           ></Button>
+          <LangueToggle />
           <ModeToggle />
         </nav>
       </div>
