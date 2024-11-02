@@ -5,9 +5,6 @@
   "files": [
     "base.json",
     "nextjs.json",
-    "react-library.json",
-    "base-chat.json",
-    "react-chat-library.json",
-    "nextjs-embeds.json"
+    "react-library.json"
   ]
 }
