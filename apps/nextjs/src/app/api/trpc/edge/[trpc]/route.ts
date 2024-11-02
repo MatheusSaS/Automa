@@ -1,17 +1,12 @@
 import type { NextRequest } from "next/server"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
-
 import { createTRPCContext } from "@automa/api"
 import { edgeRouter } from "@automa/api/edge"
 import { auth, validateToken } from "@automa/auth"
-
-export const runtime = "edge"
-
+//export const runtime = "edge"
 const createContext = async (req: NextRequest) => {
   const authToken = req.headers.get("Authorization") ?? null
   const session = authToken ? await validateToken(authToken) : await auth()
-  console.log("authToken teste " + authToken)
-
   return createTRPCContext({
     headers: req.headers,
     auth: {
@@ -21,7 +16,6 @@ const createContext = async (req: NextRequest) => {
     req,
   })
 }
-
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
     endpoint: "/api/trpc/edge",
@@ -33,5 +27,4 @@ const handler = (req: NextRequest) =>
       console.error(error)
     },
   })
-
 export { handler as GET, handler as POST }
