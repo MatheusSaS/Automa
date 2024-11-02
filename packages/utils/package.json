@@ -17,14 +17,14 @@
     "@automa/tsconfig": "workspace:*",
     "@automa/tailwind-config": "workspace:*",
     "@automa/eslint-config": "workspace:*",
-    "@automa/prettier-config": "workspace:*",
-    "tsup": "^8.2.4"
+    "@automa/prettier-config": "workspace:*"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.4.0",
     "nanoid": "^5.0.7",
-    "prettier": "^3.2.4"
+    "prettier": "^3.2.4",
+    "tsup": "^8.2.4"
   },
   "eslintConfig": {
     "root": true,
