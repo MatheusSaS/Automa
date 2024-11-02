@@ -28,7 +28,7 @@ export type Categorie = {
 export type Product = {
   id: Generated<string>
   userId: string
-  categorieId: string
+  categorieId: string | null
   name: string
   description: string | null
   price: number

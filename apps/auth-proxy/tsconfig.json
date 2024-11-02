@@ -1,5 +1,0 @@
-{
-  "extends": "@automa/tsconfig/base.json",
-  "include": ["routes"],
-  "exclude": ["node_modules"]
-}
