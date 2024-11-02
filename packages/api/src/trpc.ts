@@ -15,7 +15,6 @@ import { ZodError } from "zod"
 import { db } from "@automa/db"
 
 import { transformer } from "./transformer"
-import { OpenApiMeta } from "trpc-swagger"
 
 /**
  * Isomorphic Session getter for API requests
@@ -97,22 +96,19 @@ export const createTRPCContext = async (opts: {
  * This is where the trpc api is initialized, connecting the context and
  * transformer
  */
-export const t = initTRPC
-  .context<typeof createTRPCContext>()
-  .meta<OpenApiMeta>()
-  .create({
-    transformer,
-    errorFormatter({ shape, error }) {
-      return {
-        ...shape,
-        data: {
-          ...shape.data,
-          zodError:
-            error.cause instanceof ZodError ? error.cause.flatten() : null,
-        },
-      }
-    },
-  })
+export const t = initTRPC.context<typeof createTRPCContext>().create({
+  transformer,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    }
+  },
+})
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)

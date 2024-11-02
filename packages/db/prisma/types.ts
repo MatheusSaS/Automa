@@ -5,8 +5,6 @@ export type Generated<T> =
     : ColumnType<T, T | undefined, T>
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
-import type { AgentModelName } from "./enums"
-
 export type Account = {
   id: Generated<string>
   userId: string
@@ -21,14 +19,19 @@ export type Account = {
   id_token: string | null
   session_state: string | null
 }
-export type Agents = {
-  id: string
+export type Categorie = {
+  id: Generated<string>
   userId: string
   name: string
+  createdAt: Generated<Timestamp>
+}
+export type Product = {
+  id: Generated<string>
+  userId: string
+  categorieId: string
+  name: string
   description: string | null
-  promptSystem: string | null
-  modelName: Generated<AgentModelName>
-  temperature: Generated<number>
+  price: number
   createdAt: Generated<Timestamp>
 }
 export type Session = {
@@ -52,7 +55,8 @@ export type VerificationToken = {
 }
 export type DB = {
   Account: Account
-  Agents: Agents
+  Categorie: Categorie
+  Product: Product
   Session: Session
   User: User
   VerificationToken: VerificationToken

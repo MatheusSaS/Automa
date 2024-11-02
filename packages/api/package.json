@@ -8,10 +8,7 @@
     "./edge": "./src/edge.ts",
     "./lambda": "./src/lambda.ts",
     "./transformer": "./src/transformer.ts",
-    "./validators": "./src/validators.ts",
-    "./trpcExressMiddleware": "./src/swagger/trpcExressMiddleware.ts",
-    "./expressMiddleware": "./src/swagger/expressMiddleware.ts",
-    "./openapi": "./src/swagger/openapi.ts"
+    "./validators": "./src/validators.ts"
   },
   "typesVersions": {
     "*": {
@@ -46,7 +43,7 @@
     "zod-form-data": "^2.0.2",
     "axios": "^1.7.5",
     "cheerio": "^1.0.0",
-    "trpc-swagger": "^1.2.6"
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "@automa/eslint-config": "workspace:*",

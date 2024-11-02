@@ -14,6 +14,8 @@ import {
 } from "@automa/ui"
 import { getMenuList } from "@/app/config"
 import { CollapseMenuButton } from "./collapse-menu-button"
+import { useRouter } from "next/navigation"
+import { SignOut } from "@/components/sign-out"
 
 interface MenuProps {
   isOpen: boolean | undefined
@@ -22,6 +24,7 @@ interface MenuProps {
 export function Menu({ isOpen }: MenuProps) {
   const pathname = usePathname()
   const menuList = getMenuList(pathname)
+  const router = useRouter()
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
@@ -61,7 +64,7 @@ export function Menu({ isOpen }: MenuProps) {
                                 (active === undefined &&
                                   pathname.startsWith(href)) ||
                                 active
-                                  ? "secondary"
+                                  ? "default"
                                   : "ghost"
                               }
                               className="mb-1 h-10 w-full justify-start"
@@ -117,7 +120,10 @@ export function Menu({ isOpen }: MenuProps) {
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
                   <Button
-                    onClick={() => {}}
+                    onClick={() => {
+                      SignOut()
+                      router.refresh()
+                    }}
                     variant="outline"
                     className="mt-5 h-10 w-full justify-center"
                   >

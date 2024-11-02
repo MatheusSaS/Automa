@@ -1,7 +1,9 @@
-import { agentRouter } from "./router/agent";
-import { createTRPCRouter } from "./trpc";
+import { categorieRouter } from "./router/categorie"
+import { productRouter } from "./router/product"
+import { createTRPCRouter } from "./trpc"
 
 // Deployed to /trpc/edge/**
 export const edgeRouter = createTRPCRouter({
-  agent: agentRouter
-});
+  product: productRouter,
+  categorie: categorieRouter,
+})

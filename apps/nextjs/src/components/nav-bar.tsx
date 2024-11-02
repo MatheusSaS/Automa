@@ -6,7 +6,7 @@ import { LangueToggle } from "./langue-toggle"
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 z-[50] w-full border-b border-border/40 bg-background/95 backdrop-blur-sm dark:bg-black/[0.6]">
+    <header className="sticky top-0 z-[999] w-full border-b border-border/40 bg-background/95 backdrop-blur-sm dark:bg-black/[0.6]">
       <div className="container flex h-14 items-center">
         <Link
           href="/"

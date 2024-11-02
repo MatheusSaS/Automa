@@ -15,24 +15,33 @@ datasource db {
   directUrl    = env("POSTGRES_PRISMA_URL_NON_POOLING")
 }
 
-enum AgentModelName {
-  gpt_3_5_turbo
-}
-
-model Agents {
-  id String @id @db.VarChar(30)
-
-  userId       String         @db.VarChar(36)
+model Product {
+  id           String  @id @default(uuid())
+  userId       String
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categorieId  String?
+  categorie    Categorie?    @relation(fields: [categorieId], references: [id], onDelete: Cascade)
   name         String
   description  String?
-  promptSystem String?
-  modelName    AgentModelName @default(gpt_3_5_turbo)
-  temperature  Float          @default(0.0)
+  price        Float
 
   createdAt DateTime @default(now())
 
   @@index([userId])
   @@index([userId, id])
+}
+
+model Categorie {
+  id           String  @id @default(uuid())
+  userId       String
+  name         String
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Product Product[]
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, id])
+
 }
 
 // NextAuth.js Models
@@ -76,6 +85,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  Products Product[]
+
+  Categories Categorie[]
 }
 
 model VerificationToken {

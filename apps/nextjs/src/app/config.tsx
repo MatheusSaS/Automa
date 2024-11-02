@@ -1,6 +1,4 @@
 import {
-  Tag,
-  Users,
   Settings,
   Bookmark,
   SquarePen,
@@ -28,14 +26,12 @@ type Menu = {
 }
 
 type Group = {
-  groupLabel: string
   menus: Menu[]
 }
 
 export function getMenuList(pathname: string): Group[] {
   return [
     {
-      groupLabel: "",
       menus: [
         {
           href: "/dashboard",
@@ -46,47 +42,26 @@ export function getMenuList(pathname: string): Group[] {
       ],
     },
     {
-      groupLabel: "Contents",
       menus: [
         {
           href: "",
-          label: "Posts",
+          label: "Produtos",
           icon: SquarePen,
           submenus: [
             {
-              href: "/posts",
-              label: "All Posts",
+              href: "/products",
+              label: "Todos Produtos",
             },
             {
-              href: "/posts/new",
-              label: "New Post",
+              href: "/products/new",
+              label: "Novo produto",
             },
           ],
         },
         {
           href: "/categories",
-          label: "Categories",
+          label: "Categorias",
           icon: Bookmark,
-        },
-        {
-          href: "/tags",
-          label: "Tags",
-          icon: Tag,
-        },
-      ],
-    },
-    {
-      groupLabel: "Settings",
-      menus: [
-        {
-          href: "/users",
-          label: "Users",
-          icon: Users,
-        },
-        {
-          href: "/account",
-          label: "Account",
-          icon: Settings,
         },
       ],
     },

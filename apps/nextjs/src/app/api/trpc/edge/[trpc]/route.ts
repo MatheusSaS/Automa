@@ -10,6 +10,7 @@ export const runtime = "edge"
 const createContext = async (req: NextRequest) => {
   const authToken = req.headers.get("Authorization") ?? null
   const session = authToken ? await validateToken(authToken) : await auth()
+  console.log("authToken teste " + authToken)
 
   return createTRPCContext({
     headers: req.headers,
