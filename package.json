@@ -2,9 +2,9 @@
   "name": "automa",
   "private": true,
   "engines": {
-    "node": ">=v20.15.0"
+    "node": ">=v20.12.2"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules dist .next",
