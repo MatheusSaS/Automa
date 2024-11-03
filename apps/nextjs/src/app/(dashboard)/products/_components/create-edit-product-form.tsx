@@ -76,9 +76,9 @@ export default function CreateEditProductForm({
         await api.product.create.mutate(data)
         toast.success(`Produto criado com sucesso`)
       }
-      await router.refresh()
       SetLoading(false)
       router.push("/products")
+      router.refresh()
     } catch (error) {
       SetLoading(false)
       toast.error("Erro ao salvar Produto", {
